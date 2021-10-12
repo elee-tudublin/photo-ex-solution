@@ -12,24 +12,22 @@ const reqInit = { method: 'GET', headers: headers, mode: 'cors', cache: 'default
 async function displayNasa() {
 
   const url_nasa = 'https://api.nasa.gov/planetary/apod?api_key=IpcMgXbpAzoXXkxdmzj8wUQtpQOzj8ye2FPN2vys';
-  let apodHTML = '';
   try {
     const response = await fetch(url_nasa, reqInit);
     const data = await response.json();
     console.log(data);
-    apodHTML = `
+    const apodHTML = `
         <img class="image" src=${data.hdurl} alt='NASA Astronomy Pic of the Day ${data.title}'>
         <h4>${data.title}</h4>
         <p>Image credit & copyright: ${data.copyright} ${data.date}</p>
         `;
+    // Set the innerHTML of the apod  element = html
+    document.getElementById('apod').innerHTML = apodHTML;
   }
   // catch any errors
   catch (err) {
     console.log(err);
   }
-
-  // Set the innerHTML of the apod  element = html
-  document.getElementById('apod').innerHTML = apodHTML;
 }
 
 // Animals
